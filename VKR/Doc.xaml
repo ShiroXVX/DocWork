@@ -1,0 +1,55 @@
+﻿<Page x:Class="VKR.Doc"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VKR"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Doc">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dg" Grid.Column="1" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="3" AutoGenerateColumns="False" RowHeight="50" >
+              <DataGrid.Columns>
+                <DataGridTextColumn Header="Код__документа" Binding="{Binding Код_документа}" MaxWidth="0"/>                
+                <DataGridTemplateColumn Header="Значёк" Width="Auto" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=Значёк}" Width="40" Height="40" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Название__документа" Binding="{Binding Название_документа}"  />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="zagryz" Grid.Column="1" Grid.Row="6" MaxHeight="30" MaxWidth="150" FontSize="19" VerticalContentAlignment="Center" Content="Загрузить" Click="zagryz_Click"/>
+        <Button x:Name="edit" Grid.Column="2" Grid.Row="6" MaxHeight="30" MaxWidth="150" FontSize="19" VerticalContentAlignment="Center" Content="Свойства" Click="edit_Click"/>
+        <Button x:Name="del" Grid.Column="3" Grid.Row="6" MaxHeight="30" MaxWidth="150" FontSize="19" VerticalContentAlignment="Center" Content="Удалить" Click="del_Click"   />
+        <Button x:Name="ad" Grid.Column="4" Grid.Row="6" MaxHeight="30" MaxWidth="150" FontSize="19" VerticalContentAlignment="Center" Content="Добавить" Click="ad_Click"  />
+        <Button x:Name="zag" Grid.Column="3" Grid.Row="0" MaxHeight="30" MaxWidth="150" MinWidth="100" FontSize="19" HorizontalAlignment="Left" VerticalContentAlignment="Center" Content="Найти" Click="zag_Click"   />
+        <TextBox x:Name="pet" Grid.Column="1" Grid.Row="0" MaxHeight="30" MaxWidth="350" MinWidth="350" FontSize="19" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalAlignment="Right"  />
+        <ComboBox x:Name="tit" Grid.Column="4" Grid.Row="0" MaxHeight="30" MaxWidth="150" FontSize="19" VerticalContentAlignment="Center"  />
+
+        <CheckBox x:Name="rpo" Grid.Column="4" Content="Расширенный поиск" Grid.Row="5" MaxHeight="30" MaxWidth="180" FontSize="15" VerticalContentAlignment="Center" HorizontalAlignment="Center" Checked="rpo_Checked" Unchecked="rpo_Unchecked"/>
+
+        <ListBox x:Name="allteg" Grid.Column="4" Grid.Row="1" Grid.RowSpan="3" MaxHeight="180" MaxWidth="180" FontSize="19" VerticalContentAlignment="Center" Visibility="Collapsed" SelectionMode="Multiple"/>
+    </Grid>
+</Page>

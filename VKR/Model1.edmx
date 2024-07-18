@@ -1,0 +1,965 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище DipDocumentModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Вид_доступа">
+          <Key>
+            <PropertyRef Name="Код_доступа" />
+          </Key>
+          <Property Name="Код_доступа" Type="int" Nullable="false" />
+          <Property Name="Описание" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Документ">
+          <Key>
+            <PropertyRef Name="Код_документа" />
+          </Key>
+          <Property Name="Код_документа" Type="int" Nullable="false" />
+          <Property Name="Код_типа" Type="int" Nullable="false" />
+          <Property Name="Документ" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Дата_добавления" Type="datetime" />
+          <Property Name="Название_документа" Type="varchar" MaxLength="150" />
+          <Property Name="Код_раздела" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Должность">
+          <Key>
+            <PropertyRef Name="Код_должности" />
+          </Key>
+          <Property Name="Код_должности" Type="int" Nullable="false" />
+          <Property Name="Наименование_должности" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Дополнительный_доступ">
+          <Key>
+            <PropertyRef Name="Код_доступа" />
+            <PropertyRef Name="Код_профиля" />
+            <PropertyRef Name="Код_документа" />
+          </Key>
+          <Property Name="Код_доступа" Type="int" Nullable="false" />
+          <Property Name="Код_профиля" Type="int" Nullable="false" />
+          <Property Name="Код_документа" Type="int" Nullable="false" />
+          <Property Name="Дата_выдачи_доступа" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Отдел">
+          <Key>
+            <PropertyRef Name="Код_отдела" />
+          </Key>
+          <Property Name="Код_отдела" Type="int" Nullable="false" />
+          <Property Name="Название_отдела" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Превью">
+          <Key>
+            <PropertyRef Name="Код_превью" />
+          </Key>
+          <Property Name="Код_превью" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_документа" Type="int" Nullable="false" />
+          <Property Name="Превью" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Профиль">
+          <Key>
+            <PropertyRef Name="Код_профиля" />
+          </Key>
+          <Property Name="Код_профиля" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_сотрудника" Type="int" Nullable="false" />
+          <Property Name="Логин" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Пароль" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Код_роли" Type="int" Nullable="false" />
+          <Property Name="Путь_загрузки" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Раздел">
+          <Key>
+            <PropertyRef Name="Код_раздела" />
+          </Key>
+          <Property Name="Код_раздела" Type="int" Nullable="false" />
+          <Property Name="Название_раздела" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Роль">
+          <Key>
+            <PropertyRef Name="Код_роли" />
+          </Key>
+          <Property Name="Код_роли" Type="int" Nullable="false" />
+          <Property Name="Наименование_роли" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сотрудник">
+          <Key>
+            <PropertyRef Name="Код_сотрудника" />
+          </Key>
+          <Property Name="Код_сотрудника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_отдела" Type="int" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="50" />
+          <Property Name="Контактный_номер" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Код_должности" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Список_тегов">
+          <Key>
+            <PropertyRef Name="Код_тега" />
+          </Key>
+          <Property Name="Код_тега" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование_тега" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Тег_файла">
+          <Key>
+            <PropertyRef Name="Код_документа" />
+            <PropertyRef Name="Код_тега" />
+          </Key>
+          <Property Name="Код_документа" Type="int" Nullable="false" />
+          <Property Name="Код_тега" Type="int" Nullable="false" />
+          <Property Name="Доп_описание" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Тип_документа">
+          <Key>
+            <PropertyRef Name="Код_типа" />
+          </Key>
+          <Property Name="Код_типа" Type="int" Nullable="false" />
+          <Property Name="Название_типа" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Значёк" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="Документ_Раздел_FK">
+          <End Role="Раздел" Type="Self.Раздел" Multiplicity="1" />
+          <End Role="Документ" Type="Self.Документ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Раздел">
+              <PropertyRef Name="Код_раздела" />
+            </Principal>
+            <Dependent Role="Документ">
+              <PropertyRef Name="Код_раздела" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Документ_Тип_документа_FK">
+          <End Role="Тип_документа" Type="Self.Тип_документа" Multiplicity="1" />
+          <End Role="Документ" Type="Self.Документ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип_документа">
+              <PropertyRef Name="Код_типа" />
+            </Principal>
+            <Dependent Role="Документ">
+              <PropertyRef Name="Код_типа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Дополнительный_доступ_Вид_доступа_FK">
+          <End Role="Вид_доступа" Type="Self.Вид_доступа" Multiplicity="1" />
+          <End Role="Дополнительный_доступ" Type="Self.Дополнительный_доступ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Вид_доступа">
+              <PropertyRef Name="Код_доступа" />
+            </Principal>
+            <Dependent Role="Дополнительный_доступ">
+              <PropertyRef Name="Код_доступа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Дополнительный_доступ_Документ_FK">
+          <End Role="Документ" Type="Self.Документ" Multiplicity="1" />
+          <End Role="Дополнительный_доступ" Type="Self.Дополнительный_доступ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Документ">
+              <PropertyRef Name="Код_документа" />
+            </Principal>
+            <Dependent Role="Дополнительный_доступ">
+              <PropertyRef Name="Код_документа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Дополнительный_доступ_Профиль_FK">
+          <End Role="Профиль" Type="Self.Профиль" Multiplicity="1" />
+          <End Role="Дополнительный_доступ" Type="Self.Дополнительный_доступ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Профиль">
+              <PropertyRef Name="Код_профиля" />
+            </Principal>
+            <Dependent Role="Дополнительный_доступ">
+              <PropertyRef Name="Код_профиля" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Превью_Документ_FK">
+          <End Role="Документ" Type="Self.Документ" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Превью" Type="Self.Превью" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Документ">
+              <PropertyRef Name="Код_документа" />
+            </Principal>
+            <Dependent Role="Превью">
+              <PropertyRef Name="Код_документа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Профиль_Роль_FK">
+          <End Role="Роль" Type="Self.Роль" Multiplicity="1" />
+          <End Role="Профиль" Type="Self.Профиль" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Роль">
+              <PropertyRef Name="Код_роли" />
+            </Principal>
+            <Dependent Role="Профиль">
+              <PropertyRef Name="Код_роли" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Профиль_Сотрудник_FK">
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Профиль" Type="Self.Профиль" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудник">
+              <PropertyRef Name="Код_сотрудника" />
+            </Principal>
+            <Dependent Role="Профиль">
+              <PropertyRef Name="Код_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Сотрудник_Должность_FK">
+          <End Role="Должность" Type="Self.Должность" Multiplicity="1" />
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должность">
+              <PropertyRef Name="Код_должности" />
+            </Principal>
+            <Dependent Role="Сотрудник">
+              <PropertyRef Name="Код_должности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Сотрудник_Отдел_FK">
+          <End Role="Отдел" Type="Self.Отдел" Multiplicity="1" />
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Отдел">
+              <PropertyRef Name="Код_отдела" />
+            </Principal>
+            <Dependent Role="Сотрудник">
+              <PropertyRef Name="Код_отдела" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Тег_файла_Документ_FK">
+          <End Role="Документ" Type="Self.Документ" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Тег_файла" Type="Self.Тег_файла" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Документ">
+              <PropertyRef Name="Код_документа" />
+            </Principal>
+            <Dependent Role="Тег_файла">
+              <PropertyRef Name="Код_документа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Тег_файла_Список_тегов_FK">
+          <End Role="Список_тегов" Type="Self.Список_тегов" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Тег_файла" Type="Self.Тег_файла" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Список_тегов">
+              <PropertyRef Name="Код_тега" />
+            </Principal>
+            <Dependent Role="Тег_файла">
+              <PropertyRef Name="Код_тега" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище DipDocumentModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Вид_доступа" EntityType="Self.Вид_доступа" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Документ" EntityType="Self.Документ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Должность" EntityType="Self.Должность" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Дополнительный_доступ" EntityType="Self.Дополнительный_доступ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Отдел" EntityType="Self.Отдел" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Превью" EntityType="Self.Превью" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Профиль" EntityType="Self.Профиль" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Раздел" EntityType="Self.Раздел" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Роль" EntityType="Self.Роль" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сотрудник" EntityType="Self.Сотрудник" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Список_тегов" EntityType="Self.Список_тегов" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Тег_файла" EntityType="Self.Тег_файла" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Тип_документа" EntityType="Self.Тип_документа" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Документ_Раздел_FK" Association="Self.Документ_Раздел_FK">
+            <End Role="Раздел" EntitySet="Раздел" />
+            <End Role="Документ" EntitySet="Документ" />
+          </AssociationSet>
+          <AssociationSet Name="Документ_Тип_документа_FK" Association="Self.Документ_Тип_документа_FK">
+            <End Role="Тип_документа" EntitySet="Тип_документа" />
+            <End Role="Документ" EntitySet="Документ" />
+          </AssociationSet>
+          <AssociationSet Name="Дополнительный_доступ_Вид_доступа_FK" Association="Self.Дополнительный_доступ_Вид_доступа_FK">
+            <End Role="Вид_доступа" EntitySet="Вид_доступа" />
+            <End Role="Дополнительный_доступ" EntitySet="Дополнительный_доступ" />
+          </AssociationSet>
+          <AssociationSet Name="Дополнительный_доступ_Документ_FK" Association="Self.Дополнительный_доступ_Документ_FK">
+            <End Role="Документ" EntitySet="Документ" />
+            <End Role="Дополнительный_доступ" EntitySet="Дополнительный_доступ" />
+          </AssociationSet>
+          <AssociationSet Name="Дополнительный_доступ_Профиль_FK" Association="Self.Дополнительный_доступ_Профиль_FK">
+            <End Role="Профиль" EntitySet="Профиль" />
+            <End Role="Дополнительный_доступ" EntitySet="Дополнительный_доступ" />
+          </AssociationSet>
+          <AssociationSet Name="Превью_Документ_FK" Association="Self.Превью_Документ_FK">
+            <End Role="Документ" EntitySet="Документ" />
+            <End Role="Превью" EntitySet="Превью" />
+          </AssociationSet>
+          <AssociationSet Name="Профиль_Роль_FK" Association="Self.Профиль_Роль_FK">
+            <End Role="Роль" EntitySet="Роль" />
+            <End Role="Профиль" EntitySet="Профиль" />
+          </AssociationSet>
+          <AssociationSet Name="Профиль_Сотрудник_FK" Association="Self.Профиль_Сотрудник_FK">
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+            <End Role="Профиль" EntitySet="Профиль" />
+          </AssociationSet>
+          <AssociationSet Name="Сотрудник_Должность_FK" Association="Self.Сотрудник_Должность_FK">
+            <End Role="Должность" EntitySet="Должность" />
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+          </AssociationSet>
+          <AssociationSet Name="Сотрудник_Отдел_FK" Association="Self.Сотрудник_Отдел_FK">
+            <End Role="Отдел" EntitySet="Отдел" />
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+          </AssociationSet>
+          <AssociationSet Name="Тег_файла_Документ_FK" Association="Self.Тег_файла_Документ_FK">
+            <End Role="Документ" EntitySet="Документ" />
+            <End Role="Тег_файла" EntitySet="Тег_файла" />
+          </AssociationSet>
+          <AssociationSet Name="Тег_файла_Список_тегов_FK" Association="Self.Тег_файла_Список_тегов_FK">
+            <End Role="Список_тегов" EntitySet="Список_тегов" />
+            <End Role="Тег_файла" EntitySet="Тег_файла" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DipDocumentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Вид_доступа">
+          <Key>
+            <PropertyRef Name="Код_доступа" />
+          </Key>
+          <Property Name="Код_доступа" Type="Int32" Nullable="false" />
+          <Property Name="Описание" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Дополнительный_доступ" Relationship="Self.Дополнительный_доступ_Вид_доступа_FK" FromRole="Вид_доступа" ToRole="Дополнительный_доступ" />
+        </EntityType>
+        <EntityType Name="Документ">
+          <Key>
+            <PropertyRef Name="Код_документа" />
+          </Key>
+          <Property Name="Код_документа" Type="Int32" Nullable="false" />
+          <Property Name="Код_типа" Type="Int32" Nullable="false" />
+          <Property Name="Документ1" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Дата_добавления" Type="DateTime" Precision="3" />
+          <Property Name="Название_документа" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Код_раздела" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Раздел" Relationship="Self.Документ_Раздел_FK" FromRole="Документ" ToRole="Раздел" />
+          <NavigationProperty Name="Тип_документа" Relationship="Self.Документ_Тип_документа_FK" FromRole="Документ" ToRole="Тип_документа" />
+          <NavigationProperty Name="Дополнительный_доступ" Relationship="Self.Дополнительный_доступ_Документ_FK" FromRole="Документ" ToRole="Дополнительный_доступ" />
+          <NavigationProperty Name="Превью" Relationship="Self.Превью_Документ_FK" FromRole="Документ" ToRole="Превью" />
+          <NavigationProperty Name="Тег_файла" Relationship="Self.Тег_файла_Документ_FK" FromRole="Документ" ToRole="Тег_файла" />
+        </EntityType>
+        <EntityType Name="Должность">
+          <Key>
+            <PropertyRef Name="Код_должности" />
+          </Key>
+          <Property Name="Код_должности" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_должности" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Сотрудник" Relationship="Self.Сотрудник_Должность_FK" FromRole="Должность" ToRole="Сотрудник" />
+        </EntityType>
+        <EntityType Name="Дополнительный_доступ">
+          <Key>
+            <PropertyRef Name="Код_доступа" />
+            <PropertyRef Name="Код_профиля" />
+            <PropertyRef Name="Код_документа" />
+          </Key>
+          <Property Name="Код_доступа" Type="Int32" Nullable="false" />
+          <Property Name="Код_профиля" Type="Int32" Nullable="false" />
+          <Property Name="Код_документа" Type="Int32" Nullable="false" />
+          <Property Name="Дата_выдачи_доступа" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Вид_доступа" Relationship="Self.Дополнительный_доступ_Вид_доступа_FK" FromRole="Дополнительный_доступ" ToRole="Вид_доступа" />
+          <NavigationProperty Name="Документ" Relationship="Self.Дополнительный_доступ_Документ_FK" FromRole="Дополнительный_доступ" ToRole="Документ" />
+          <NavigationProperty Name="Профиль" Relationship="Self.Дополнительный_доступ_Профиль_FK" FromRole="Дополнительный_доступ" ToRole="Профиль" />
+        </EntityType>
+        <EntityType Name="Отдел">
+          <Key>
+            <PropertyRef Name="Код_отдела" />
+          </Key>
+          <Property Name="Код_отдела" Type="Int32" Nullable="false" />
+          <Property Name="Название_отдела" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Сотрудник" Relationship="Self.Сотрудник_Отдел_FK" FromRole="Отдел" ToRole="Сотрудник" />
+        </EntityType>
+        <EntityType Name="Превью">
+          <Key>
+            <PropertyRef Name="Код_превью" />
+          </Key>
+          <Property Name="Код_превью" Type="Int32" Nullable="false" />
+          <Property Name="Код_документа" Type="Int32" Nullable="false" />
+          <Property Name="Превью1" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Документ" Relationship="Self.Превью_Документ_FK" FromRole="Превью" ToRole="Документ" />
+        </EntityType>
+        <EntityType Name="Профиль">
+          <Key>
+            <PropertyRef Name="Код_профиля" />
+          </Key>
+          <Property Name="Код_профиля" Type="Int32" Nullable="false" />
+          <Property Name="Код_сотрудника" Type="Int32" Nullable="false" />
+          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Код_роли" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Дополнительный_доступ" Relationship="Self.Дополнительный_доступ_Профиль_FK" FromRole="Профиль" ToRole="Дополнительный_доступ" />
+          <NavigationProperty Name="Роль" Relationship="Self.Профиль_Роль_FK" FromRole="Профиль" ToRole="Роль" />
+          <NavigationProperty Name="Сотрудник" Relationship="Self.Профиль_Сотрудник_FK" FromRole="Профиль" ToRole="Сотрудник" />
+          <Property Name="Путь_загрузки" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Раздел">
+          <Key>
+            <PropertyRef Name="Код_раздела" />
+          </Key>
+          <Property Name="Код_раздела" Type="Int32" Nullable="false" />
+          <Property Name="Название_раздела" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Документ" Relationship="Self.Документ_Раздел_FK" FromRole="Раздел" ToRole="Документ" />
+        </EntityType>
+        <EntityType Name="Роль">
+          <Key>
+            <PropertyRef Name="Код_роли" />
+          </Key>
+          <Property Name="Код_роли" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_роли" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Профиль" Relationship="Self.Профиль_Роль_FK" FromRole="Роль" ToRole="Профиль" />
+        </EntityType>
+        <EntityType Name="Сотрудник">
+          <Key>
+            <PropertyRef Name="Код_сотрудника" />
+          </Key>
+          <Property Name="Код_сотрудника" Type="Int32" Nullable="false" />
+          <Property Name="Код_отдела" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Контактный_номер" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Код_должности" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Должность" Relationship="Self.Сотрудник_Должность_FK" FromRole="Сотрудник" ToRole="Должность" />
+          <NavigationProperty Name="Отдел" Relationship="Self.Сотрудник_Отдел_FK" FromRole="Сотрудник" ToRole="Отдел" />
+          <NavigationProperty Name="Профиль" Relationship="Self.Профиль_Сотрудник_FK" FromRole="Сотрудник" ToRole="Профиль" />
+        </EntityType>
+        <EntityType Name="Список_тегов">
+          <Key>
+            <PropertyRef Name="Код_тега" />
+          </Key>
+          <Property Name="Код_тега" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_тега" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Тег_файла" Relationship="Self.Тег_файла_Список_тегов_FK" FromRole="Список_тегов" ToRole="Тег_файла" />
+        </EntityType>
+        <EntityType Name="Тег_файла">
+          <Key>
+            <PropertyRef Name="Код_документа" />
+            <PropertyRef Name="Код_тега" />
+          </Key>
+          <Property Name="Код_документа" Type="Int32" Nullable="false" />
+          <Property Name="Код_тега" Type="Int32" Nullable="false" />
+          <Property Name="Доп_описание" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Документ" Relationship="Self.Тег_файла_Документ_FK" FromRole="Тег_файла" ToRole="Документ" />
+          <NavigationProperty Name="Список_тегов" Relationship="Self.Тег_файла_Список_тегов_FK" FromRole="Тег_файла" ToRole="Список_тегов" />
+        </EntityType>
+        <EntityType Name="Тип_документа">
+          <Key>
+            <PropertyRef Name="Код_типа" />
+          </Key>
+          <Property Name="Код_типа" Type="Int32" Nullable="false" />
+          <Property Name="Название_типа" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Значёк" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Документ" Relationship="Self.Документ_Тип_документа_FK" FromRole="Тип_документа" ToRole="Документ" />
+        </EntityType>
+        <Association Name="Дополнительный_доступ_Вид_доступа_FK">
+          <End Role="Вид_доступа" Type="Self.Вид_доступа" Multiplicity="1" />
+          <End Role="Дополнительный_доступ" Type="Self.Дополнительный_доступ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Вид_доступа">
+              <PropertyRef Name="Код_доступа" />
+            </Principal>
+            <Dependent Role="Дополнительный_доступ">
+              <PropertyRef Name="Код_доступа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Документ_Раздел_FK">
+          <End Role="Раздел" Type="Self.Раздел" Multiplicity="1" />
+          <End Role="Документ" Type="Self.Документ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Раздел">
+              <PropertyRef Name="Код_раздела" />
+            </Principal>
+            <Dependent Role="Документ">
+              <PropertyRef Name="Код_раздела" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Документ_Тип_документа_FK">
+          <End Role="Тип_документа" Type="Self.Тип_документа" Multiplicity="1" />
+          <End Role="Документ" Type="Self.Документ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип_документа">
+              <PropertyRef Name="Код_типа" />
+            </Principal>
+            <Dependent Role="Документ">
+              <PropertyRef Name="Код_типа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Дополнительный_доступ_Документ_FK">
+          <End Role="Документ" Type="Self.Документ" Multiplicity="1" />
+          <End Role="Дополнительный_доступ" Type="Self.Дополнительный_доступ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Документ">
+              <PropertyRef Name="Код_документа" />
+            </Principal>
+            <Dependent Role="Дополнительный_доступ">
+              <PropertyRef Name="Код_документа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Превью_Документ_FK">
+          <End Role="Документ" Type="Self.Документ" Multiplicity="1" />
+          <End Role="Превью" Type="Self.Превью" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Документ">
+              <PropertyRef Name="Код_документа" />
+            </Principal>
+            <Dependent Role="Превью">
+              <PropertyRef Name="Код_документа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Тег_файла_Документ_FK">
+          <End Role="Документ" Type="Self.Документ" Multiplicity="1" />
+          <End Role="Тег_файла" Type="Self.Тег_файла" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Документ">
+              <PropertyRef Name="Код_документа" />
+            </Principal>
+            <Dependent Role="Тег_файла">
+              <PropertyRef Name="Код_документа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Сотрудник_Должность_FK">
+          <End Role="Должность" Type="Self.Должность" Multiplicity="1" />
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должность">
+              <PropertyRef Name="Код_должности" />
+            </Principal>
+            <Dependent Role="Сотрудник">
+              <PropertyRef Name="Код_должности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Дополнительный_доступ_Профиль_FK">
+          <End Role="Профиль" Type="Self.Профиль" Multiplicity="1" />
+          <End Role="Дополнительный_доступ" Type="Self.Дополнительный_доступ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Профиль">
+              <PropertyRef Name="Код_профиля" />
+            </Principal>
+            <Dependent Role="Дополнительный_доступ">
+              <PropertyRef Name="Код_профиля" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Сотрудник_Отдел_FK">
+          <End Role="Отдел" Type="Self.Отдел" Multiplicity="1" />
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Отдел">
+              <PropertyRef Name="Код_отдела" />
+            </Principal>
+            <Dependent Role="Сотрудник">
+              <PropertyRef Name="Код_отдела" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Профиль_Роль_FK">
+          <End Role="Роль" Type="Self.Роль" Multiplicity="1" />
+          <End Role="Профиль" Type="Self.Профиль" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Роль">
+              <PropertyRef Name="Код_роли" />
+            </Principal>
+            <Dependent Role="Профиль">
+              <PropertyRef Name="Код_роли" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Профиль_Сотрудник_FK">
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="1" />
+          <End Role="Профиль" Type="Self.Профиль" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудник">
+              <PropertyRef Name="Код_сотрудника" />
+            </Principal>
+            <Dependent Role="Профиль">
+              <PropertyRef Name="Код_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Тег_файла_Список_тегов_FK">
+          <End Role="Список_тегов" Type="Self.Список_тегов" Multiplicity="1" />
+          <End Role="Тег_файла" Type="Self.Тег_файла" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Список_тегов">
+              <PropertyRef Name="Код_тега" />
+            </Principal>
+            <Dependent Role="Тег_файла">
+              <PropertyRef Name="Код_тега" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DipDocumentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Вид_доступа" EntityType="Self.Вид_доступа" />
+          <EntitySet Name="Документ" EntityType="Self.Документ" />
+          <EntitySet Name="Должность" EntityType="Self.Должность" />
+          <EntitySet Name="Дополнительный_доступ" EntityType="Self.Дополнительный_доступ" />
+          <EntitySet Name="Отдел" EntityType="Self.Отдел" />
+          <EntitySet Name="Превью" EntityType="Self.Превью" />
+          <EntitySet Name="Профиль" EntityType="Self.Профиль" />
+          <EntitySet Name="Раздел" EntityType="Self.Раздел" />
+          <EntitySet Name="Роль" EntityType="Self.Роль" />
+          <EntitySet Name="Сотрудник" EntityType="Self.Сотрудник" />
+          <EntitySet Name="Список_тегов" EntityType="Self.Список_тегов" />
+          <EntitySet Name="Тег_файла" EntityType="Self.Тег_файла" />
+          <EntitySet Name="Тип_документа" EntityType="Self.Тип_документа" />
+          <AssociationSet Name="Дополнительный_доступ_Вид_доступа_FK" Association="Self.Дополнительный_доступ_Вид_доступа_FK">
+            <End Role="Вид_доступа" EntitySet="Вид_доступа" />
+            <End Role="Дополнительный_доступ" EntitySet="Дополнительный_доступ" />
+          </AssociationSet>
+          <AssociationSet Name="Документ_Раздел_FK" Association="Self.Документ_Раздел_FK">
+            <End Role="Раздел" EntitySet="Раздел" />
+            <End Role="Документ" EntitySet="Документ" />
+          </AssociationSet>
+          <AssociationSet Name="Документ_Тип_документа_FK" Association="Self.Документ_Тип_документа_FK">
+            <End Role="Тип_документа" EntitySet="Тип_документа" />
+            <End Role="Документ" EntitySet="Документ" />
+          </AssociationSet>
+          <AssociationSet Name="Дополнительный_доступ_Документ_FK" Association="Self.Дополнительный_доступ_Документ_FK">
+            <End Role="Документ" EntitySet="Документ" />
+            <End Role="Дополнительный_доступ" EntitySet="Дополнительный_доступ" />
+          </AssociationSet>
+          <AssociationSet Name="Превью_Документ_FK" Association="Self.Превью_Документ_FK">
+            <End Role="Документ" EntitySet="Документ" />
+            <End Role="Превью" EntitySet="Превью" />
+          </AssociationSet>
+          <AssociationSet Name="Тег_файла_Документ_FK" Association="Self.Тег_файла_Документ_FK">
+            <End Role="Документ" EntitySet="Документ" />
+            <End Role="Тег_файла" EntitySet="Тег_файла" />
+          </AssociationSet>
+          <AssociationSet Name="Сотрудник_Должность_FK" Association="Self.Сотрудник_Должность_FK">
+            <End Role="Должность" EntitySet="Должность" />
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+          </AssociationSet>
+          <AssociationSet Name="Дополнительный_доступ_Профиль_FK" Association="Self.Дополнительный_доступ_Профиль_FK">
+            <End Role="Профиль" EntitySet="Профиль" />
+            <End Role="Дополнительный_доступ" EntitySet="Дополнительный_доступ" />
+          </AssociationSet>
+          <AssociationSet Name="Сотрудник_Отдел_FK" Association="Self.Сотрудник_Отдел_FK">
+            <End Role="Отдел" EntitySet="Отдел" />
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+          </AssociationSet>
+          <AssociationSet Name="Профиль_Роль_FK" Association="Self.Профиль_Роль_FK">
+            <End Role="Роль" EntitySet="Роль" />
+            <End Role="Профиль" EntitySet="Профиль" />
+          </AssociationSet>
+          <AssociationSet Name="Профиль_Сотрудник_FK" Association="Self.Профиль_Сотрудник_FK">
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+            <End Role="Профиль" EntitySet="Профиль" />
+          </AssociationSet>
+          <AssociationSet Name="Тег_файла_Список_тегов_FK" Association="Self.Тег_файла_Список_тегов_FK">
+            <End Role="Список_тегов" EntitySet="Список_тегов" />
+            <End Role="Тег_файла" EntitySet="Тег_файла" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DipDocumentModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DipDocumentModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DipDocumentModelContainer" CdmEntityContainer="DipDocumentEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DipDocumentModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Вид_доступа">
+            <EntityTypeMapping TypeName="DipDocumentModel.Вид_доступа">
+              <MappingFragment StoreEntitySet="Вид_доступа">
+                <ScalarProperty Name="Код_доступа" ColumnName="Код_доступа" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Документ">
+            <EntityTypeMapping TypeName="DipDocumentModel.Документ">
+              <MappingFragment StoreEntitySet="Документ">
+                <ScalarProperty Name="Код_документа" ColumnName="Код_документа" />
+                <ScalarProperty Name="Код_типа" ColumnName="Код_типа" />
+                <ScalarProperty Name="Документ1" ColumnName="Документ" />
+                <ScalarProperty Name="Дата_добавления" ColumnName="Дата_добавления" />
+                <ScalarProperty Name="Название_документа" ColumnName="Название_документа" />
+                <ScalarProperty Name="Код_раздела" ColumnName="Код_раздела" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Должность">
+            <EntityTypeMapping TypeName="DipDocumentModel.Должность">
+              <MappingFragment StoreEntitySet="Должность">
+                <ScalarProperty Name="Код_должности" ColumnName="Код_должности" />
+                <ScalarProperty Name="Наименование_должности" ColumnName="Наименование_должности" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Дополнительный_доступ">
+            <EntityTypeMapping TypeName="DipDocumentModel.Дополнительный_доступ">
+              <MappingFragment StoreEntitySet="Дополнительный_доступ">
+                <ScalarProperty Name="Код_доступа" ColumnName="Код_доступа" />
+                <ScalarProperty Name="Код_профиля" ColumnName="Код_профиля" />
+                <ScalarProperty Name="Код_документа" ColumnName="Код_документа" />
+                <ScalarProperty Name="Дата_выдачи_доступа" ColumnName="Дата_выдачи_доступа" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Отдел">
+            <EntityTypeMapping TypeName="DipDocumentModel.Отдел">
+              <MappingFragment StoreEntitySet="Отдел">
+                <ScalarProperty Name="Код_отдела" ColumnName="Код_отдела" />
+                <ScalarProperty Name="Название_отдела" ColumnName="Название_отдела" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Превью">
+            <EntityTypeMapping TypeName="DipDocumentModel.Превью">
+              <MappingFragment StoreEntitySet="Превью">
+                <ScalarProperty Name="Код_превью" ColumnName="Код_превью" />
+                <ScalarProperty Name="Код_документа" ColumnName="Код_документа" />
+                <ScalarProperty Name="Превью1" ColumnName="Превью" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Профиль">
+            <EntityTypeMapping TypeName="DipDocumentModel.Профиль">
+              <MappingFragment StoreEntitySet="Профиль">
+                <ScalarProperty Name="Путь_загрузки" ColumnName="Путь_загрузки" />
+                <ScalarProperty Name="Код_профиля" ColumnName="Код_профиля" />
+                <ScalarProperty Name="Код_сотрудника" ColumnName="Код_сотрудника" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Код_роли" ColumnName="Код_роли" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Раздел">
+            <EntityTypeMapping TypeName="DipDocumentModel.Раздел">
+              <MappingFragment StoreEntitySet="Раздел">
+                <ScalarProperty Name="Код_раздела" ColumnName="Код_раздела" />
+                <ScalarProperty Name="Название_раздела" ColumnName="Название_раздела" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Роль">
+            <EntityTypeMapping TypeName="DipDocumentModel.Роль">
+              <MappingFragment StoreEntitySet="Роль">
+                <ScalarProperty Name="Код_роли" ColumnName="Код_роли" />
+                <ScalarProperty Name="Наименование_роли" ColumnName="Наименование_роли" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сотрудник">
+            <EntityTypeMapping TypeName="DipDocumentModel.Сотрудник">
+              <MappingFragment StoreEntitySet="Сотрудник">
+                <ScalarProperty Name="Код_сотрудника" ColumnName="Код_сотрудника" />
+                <ScalarProperty Name="Код_отдела" ColumnName="Код_отдела" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Контактный_номер" ColumnName="Контактный_номер" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Код_должности" ColumnName="Код_должности" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Список_тегов">
+            <EntityTypeMapping TypeName="DipDocumentModel.Список_тегов">
+              <MappingFragment StoreEntitySet="Список_тегов">
+                <ScalarProperty Name="Код_тега" ColumnName="Код_тега" />
+                <ScalarProperty Name="Наименование_тега" ColumnName="Наименование_тега" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тег_файла">
+            <EntityTypeMapping TypeName="DipDocumentModel.Тег_файла">
+              <MappingFragment StoreEntitySet="Тег_файла">
+                <ScalarProperty Name="Код_документа" ColumnName="Код_документа" />
+                <ScalarProperty Name="Код_тега" ColumnName="Код_тега" />
+                <ScalarProperty Name="Доп_описание" ColumnName="Доп_описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тип_документа">
+            <EntityTypeMapping TypeName="DipDocumentModel.Тип_документа">
+              <MappingFragment StoreEntitySet="Тип_документа">
+                <ScalarProperty Name="Код_типа" ColumnName="Код_типа" />
+                <ScalarProperty Name="Название_типа" ColumnName="Название_типа" />
+                <ScalarProperty Name="Значёк" ColumnName="Значёк" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище DipDocumentModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище DipDocumentModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище DipDocumentModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище DipDocumentModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DipDocumentModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище DipDocumentModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DipDocumentModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище DipDocumentModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище DipDocumentModel.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

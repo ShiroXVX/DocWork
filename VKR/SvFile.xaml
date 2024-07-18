@@ -1,0 +1,51 @@
+﻿<Page x:Class="VKR.SvFile"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VKR"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SvFile">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="66"/>
+            <RowDefinition Height="66"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="66"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Border BorderThickness="1"
+        BorderBrush="#FF000000" Grid.Row="1" Grid.Column="1" Grid.RowSpan="8" Grid.ColumnSpan="4"  HorizontalAlignment="Left">
+        <Image x:Name="cart"  />
+            </Border>
+        <ListBox x:Name="tegg" Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" Grid.ColumnSpan="2" MaxHeight="120" MaxWidth="220"/>
+        <ListBox x:Name="teggAd" Grid.Row="4" Grid.Column="5"  Grid.ColumnSpan="2" MaxHeight="55" MaxWidth="220"/>
+
+        <Button x:Name="adTeg" Grid.Row="3" Grid.Column="5" Width="30" Height="30" Click="AdTeg_Click" >
+            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z"/>
+        </Button>
+        <Button x:Name="delTeg" Grid.Row="3" Grid.Column="6" Width="30" Height="30" Click="DelTeg_Click" >
+            <Path Stroke="Black" StrokeThickness="1"
+  Data="F1 M 25.9166,22.1667 L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z " Height="22.026" Stretch="Fill" Width="22.5"/>
+        </Button>
+
+        <Button x:Name="Cansel" Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="2" Content="назад" Width="150" Height="40" Click="Cansel_Click" />
+    </Grid>
+</Page>

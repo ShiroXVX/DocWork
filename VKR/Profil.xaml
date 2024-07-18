@@ -1,0 +1,59 @@
+﻿<Page x:Class="VKR.Profil"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VKR"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Profil">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Фамилия: " Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+        <Label x:Name="fam" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3" MinHeight="20" MaxHeight="30" FontSize="15" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+
+        <Label Content="Имя: " Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+        <Label x:Name="im" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="3" MinHeight="20" MaxHeight="30" FontSize="15" VerticalContentAlignment="Center" />
+
+        <Label Content="Отчество: " Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+        <Label x:Name="otch" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="3" MinHeight="20" MaxHeight="30" FontSize="15" VerticalContentAlignment="Center" />
+
+        <Label Content="Телефон: " Grid.Column="1"  Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+        <Label x:Name="tel" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="3" MinHeight="20" MaxHeight="30" FontSize="15" VerticalContentAlignment="Center"  />
+
+        <Label Content="Папка загрузки: " Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+        <Label x:Name="zg" Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="3" MinHeight="20" MaxHeight="30" FontSize="15" VerticalContentAlignment="Center" />
+        <Label x:Name="dol" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="3" MinHeight="20" MaxHeight="30" FontSize="15" VerticalContentAlignment="Center" />
+
+
+
+        <Label Content="Email: " Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+
+        <Button x:Name="par" Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="170" FontSize="19" VerticalContentAlignment="Center" Content="Изменить пароль"   />
+        <Button x:Name="del" Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="150" FontSize="19" VerticalContentAlignment="Center" Content="Путь загрузки" Click="del_Click"   />
+
+
+    </Grid>
+</Page>
