@@ -39,4 +39,4 @@
 <p align ="center">Рис. 11. Страница «Свойства»
 
 <h2>Физическая схема базы данных</h2>
-<p align ="center"> <img src=""/>
+<p align ="center"> <img src="https://github.com/ShiroXVX/DocWork/blob/master/database/imgbd/FizBD.jpg"/>
