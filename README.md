@@ -8,7 +8,7 @@
 <p align ="center"> <img src="https://github.com/ShiroXVX/DocWork/blob/master/ReadMe_photo/Login_null.PNG"/>
 <p align ="center">Рис. 1. Страница входа
 <p>После заполнения полей «Логин» и «Пароль», при нажатии на кнопку «Войти», происходит проверка данных. При введённом неправильном пароле или логине, пользователь увидит сообщение об ошибке представленную на рисунке 2.
-<p align ="center"> <img src="https://github.com/ShiroXVX/DocWork/blob/master/ReadMe_photo/Login_null.PNG"/>
+<p align ="center"> <img src="https://github.com/ShiroXVX/DocWork/blob/master/ReadMe_photo/Login_false.PNG"/>
 <p align ="center">Рис. 2. Ошибка входа
 <p>Если введённые данные верны, то пользователь перейдёт на главную страницу, на рисунке 3 представлена главная страница роли «Администратор». На этой странице отображена информация о сотруднике, также пользователь может сменить свой пароль, нажав кнопку «Изменить пароль» и поменять путь загрузки документа.
 <p align ="center"> <img src="https://github.com/ShiroXVX/DocWork/blob/master/ReadMe_photo/Profil.PNG"/>
