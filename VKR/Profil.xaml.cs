@@ -68,5 +68,10 @@ namespace VKR
                 bd.SaveChanges();
             }
         }
+
+        private void Par_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

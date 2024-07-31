@@ -51,7 +51,7 @@
 
         <Label Content="Email: " Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
 
-        <Button x:Name="par" Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="170" FontSize="19" VerticalContentAlignment="Center" Content="Изменить пароль"   />
+        <Button x:Name="par" Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="170" FontSize="19" VerticalContentAlignment="Center" Content="Изменить пароль" Click="Par_Click"   />
         <Button x:Name="del" Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="150" FontSize="19" VerticalContentAlignment="Center" Content="Путь загрузки" Click="del_Click"   />
 
 
